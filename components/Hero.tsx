@@ -70,7 +70,7 @@ export default function Hero() {
                         >
                             <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
                             <span className="text-sm font-medium text-primary-600 dark:text-primary-400">
-                                SpaceX Competition Top 10 Finalist
+                                Example Achievement Tag
                             </span>
                         </motion.div>
 
