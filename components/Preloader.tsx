@@ -210,11 +210,14 @@ export default function Preloader() {
                     gameState.doorOpenProgress += 0.006;
                     if (gameState.doorOpenProgress >= 1) {
                         gameState.doorOpenProgress = 1;
-                        // Start Fly-Through and Hide after short burst
+                        // Start Warp Dissolve
+                        setIsFading(true);
+
+                        // Unmount after fade completes
                         setTimeout(() => {
                             setIsHidden(true);
                             cancelAnimationFrame(animationFrameId);
-                        }, 300); // reduced from 800ms for speed
+                        }, 800);
                     }
                 }
 
