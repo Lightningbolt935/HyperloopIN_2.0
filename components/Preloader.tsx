@@ -174,6 +174,48 @@ export default function Preloader() {
         keypad.add(padBase); keypad.position.set(4.5, 0, 0.8);
         doorRight.add(keypad);
 
+        // --- TEXT LABELS ("HYPERLOOPIN") ---
+        const createTextTexture = (text: string) => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512; canvas.height = 256;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+                ctx.fillStyle = 'rgba(0,0,0,0)'; // Transparent
+                ctx.fillRect(0, 0, 512, 256);
+                ctx.fillStyle = '#ffffff'; // White text
+                ctx.font = 'bold 100px Arial'; // Industrial font
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, 256, 128);
+            }
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.minFilter = THREE.LinearFilter;
+            return tex;
+        };
+
+        const labelGeo = new THREE.PlaneGeometry(4, 2);
+        const hyperMat = new THREE.MeshBasicMaterial({ map: createTextTexture('HYPER'), transparent: true, opacity: 0.8 });
+        const loopinMat = new THREE.MeshBasicMaterial({ map: createTextTexture('LOOPIN'), transparent: true, opacity: 0.8 });
+
+        const hyperLabel = new THREE.Mesh(labelGeo, hyperMat);
+        hyperLabel.position.set(2.5, 1, 0.61); // Right side of Left Door
+        doorLeft.add(hyperLabel);
+
+        const loopinLabel = new THREE.Mesh(labelGeo, loopinMat);
+        loopinLabel.position.set(2.5, 1, 0.61); // Left side of Right Door? adjust position
+        // doorRight moves +x, doorLeft moves -x.
+        // doorRight geometry starts at 0 and goes +w. 
+        // doorLeft starts at 0 and goes -w.
+
+        // Correcting positions based on door geometry
+        // doorLeft shape: 0 to -w. We want "HYPER" on the right edge of doorLeft (near 0).
+        hyperLabel.position.set(-2.5, 0, 0.61);
+
+        // doorRight shape: 0 to +w. We want "LOOPIN" on the left edge of doorRight (near 0).
+        loopinLabel.position.set(2.5, 0, 0.61);
+        doorRight.add(loopinLabel);
+
+
         // GOLDEN PORTAL (The visible light source)
         const portalGeo = new THREE.SphereGeometry(4, 32, 32);
         const portalMat = new THREE.MeshBasicMaterial({ color: 0xffaa00, transparent: true, opacity: 0 }); // Start hidden
