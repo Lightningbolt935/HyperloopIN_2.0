@@ -38,12 +38,32 @@ export default function Preloader() {
 
         const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.2;
-        container.appendChild(renderer.domElement);
+        renderer.setPixelRatio(1); // Performance: Cap at 1
+        renderer.shadowMap.enabled = false; // Performance: Disable shadows
+
+        // ... (keep rest of scene setup) ...
+
+        // GOLDEN FLASH REF (2D Overlay control)
+        const flashOverlay = document.getElementById('golden-flash');
+
+        // ...
+
+        const animate = () => {
+            // ...
+            if (gameState.hasTriggered) {
+                // ...
+                // Sync 2D Flash Overlay
+                if (flashOverlay) {
+                    // Start flashing when doors open halfway
+                    if (eased > 0.2) {
+                        const opacity = Math.min((eased - 0.2) * 2, 1);
+                        flashOverlay.style.opacity = opacity.toString();
+                    }
+                }
+            }
+            // ...
+        }
+
 
         // --- 2. POST-PROCESSING (Bloom) ---
         const composer = new EffectComposer(renderer);
@@ -241,12 +261,16 @@ export default function Preloader() {
                 // Reveal Interior Light & Light Burst
                 const lightBurst = Math.pow(eased, 8) * 50.0;
                 tunnelLight.intensity = (eased * 1.5) + lightBurst;
-                tunnelLight.distance = 30 + (eased * 100);
 
-                // Animate Portal Mesh (Expand to engulf camera)
-                portalMat.opacity = Math.pow(eased, 3); // Fade in
-                const portalScale = 1 + (eased * 10);
-                portal.scale.set(portalScale, portalScale, portalScale);
+                // Drive 2D Golden Flash
+                const flashOverlay = document.getElementById('golden-flash');
+                if (flashOverlay) {
+                    // Ramp up opacity as doors open
+                    const flashOpacity = Math.pow(eased, 3); // Exponential ramp
+                    flashOverlay.style.opacity = flashOpacity.toString();
+
+                    // Optional: Scale effect via CSS transform if we wanted, but opacity is good for light burst
+                }
 
                 // CAMERA PHYSICS
                 // 1. Initial Pull In (0 to -3)
@@ -318,6 +342,16 @@ export default function Preloader() {
             {/* Overlays */}
             <div className="absolute inset-0 pointer-events-none z-10"
                 style={{ background: 'radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.9) 110%)' }} />
+
+            {/* GOLDEN FLASH OVERLAY - Guaranteed Visibility */}
+            <div
+                id="golden-flash"
+                className="absolute inset-0 pointer-events-none z-20 opacity-0 transition-opacity duration-75"
+                style={{
+                    background: 'radial-gradient(circle at center, rgba(255, 170, 0, 1) 0%, rgba(255, 200, 50, 0.8) 20%, rgba(0,0,0,0) 70%)',
+                    mixBlendMode: 'screen'
+                }}
+            />
 
             {/* Grain */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.06] z-11 mix-blend-overlay"
