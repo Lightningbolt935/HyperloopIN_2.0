@@ -24,7 +24,6 @@ export default function Preloader() {
     useEffect(() => {
         if (!containerRef.current) return;
 
-
         const container = containerRef.current;
         let animationFrameId: number;
 
@@ -39,22 +38,79 @@ export default function Preloader() {
         const renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(1); // Performance: Cap at 1
-        renderer.shadowMap.enabled = true; // Visibility: Re-enable shadows
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Softer shadows
+        renderer.shadowMap.enabled = true; // Visibility: Enable shadows
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
         renderer.toneMappingExposure = 1.2;
         container.appendChild(renderer.domElement);
 
-        // ...
+        // GOLDEN FLASH REF (2D Overlay control)
+        const flashOverlay = document.getElementById('golden-flash');
+
+        // --- 2. POST-PROCESSING (Bloom) ---
+        const composer = new EffectComposer(renderer);
+        const renderPass = new RenderPass(scene, camera);
+        composer.addPass(renderPass);
+
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+        bloomPass.threshold = 0.2;
+        bloomPass.strength = 1.0;
+        bloomPass.radius = 0.5;
+        composer.addPass(bloomPass);
 
         // --- 3. LIGHTING ---
-        const ambientLight = new THREE.AmbientLight(0x334455, 0.4); // Boosted from 0.2
+        const ambientLight = new THREE.AmbientLight(0x334455, 0.4); // Boosted Ambient
         scene.add(ambientLight);
 
-        // ...
+        // Helper to create ceiling lights with shadows
+        const createCeilingLight = (x: number, y: number, z: number) => {
+            const strip = new THREE.Mesh(
+                new THREE.BoxGeometry(2.5, 0.1, 0.5),
+                new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1 })
+            );
+            strip.position.set(x, y, z);
+            scene.add(strip);
 
+            const light = new THREE.PointLight(0xffffff, 1.2, 15);
+            light.position.set(x, y - 0.5, z + 0.5);
+            light.castShadow = true;
+            light.shadow.mapSize.set(1024, 1024);
+            light.shadow.bias = -0.001;
+            scene.add(light);
+        };
+
+        createCeilingLight(-3, 6, 2);
+        createCeilingLight(0, 6, 2);
+        createCeilingLight(3, 6, 2);
+
+        // Interior Tunnel Light (Hidden initially) - GOLDEN LIGHT
+        const tunnelLight = new THREE.PointLight(0xffaa00, 0, 30);
+        tunnelLight.position.set(0, 4, -10);
+        scene.add(tunnelLight);
+
+        // --- 4. MATERIALS & TEXTURES ---
+        const createBumpMap = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1024; canvas.height = 1024;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+                ctx.fillStyle = '#808080'; ctx.fillRect(0, 0, 1024, 1024);
+                for (let i = 0; i < 100000; i++) {
+                    const shade = Math.floor(Math.random() * 255);
+                    ctx.fillStyle = `rgb(${shade},${shade},${shade})`;
+                    const size = Math.random() * 2 + 1;
+                    ctx.fillRect(Math.random() * 1024, Math.random() * 1024, size, size);
+                }
+            }
+            const tex = new THREE.CanvasTexture(canvas);
+            tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+            tex.repeat.set(2, 2);
+            return tex;
+        };
+
+        const bumpTexture = createBumpMap();
         const baseMetalMaterial = new THREE.MeshStandardMaterial({
-            color: 0x556677, roughness: 0.5, metalness: 0.6, // Reduced from 0.8 for better contrast
+            color: 0x556677, roughness: 0.5, metalness: 0.6, // Reduced metalness
             bumpMap: bumpTexture, bumpScale: 0.02, side: THREE.DoubleSide
         });
         const darkerMetalMaterial = new THREE.MeshStandardMaterial({
@@ -189,14 +245,16 @@ export default function Preloader() {
                 tunnelLight.intensity = (eased * 1.5) + lightBurst;
 
                 // Drive 2D Golden Flash
-                const flashOverlay = document.getElementById('golden-flash');
                 if (flashOverlay) {
                     // Ramp up opacity as doors open
                     const flashOpacity = Math.pow(eased, 3); // Exponential ramp
                     flashOverlay.style.opacity = flashOpacity.toString();
-
-                    // Optional: Scale effect via CSS transform if we wanted, but opacity is good for light burst
                 }
+
+                // Animate Portal Mesh (Expand to engulf camera)
+                portalMat.opacity = Math.pow(eased, 3); // Fade in
+                const portalScale = 1 + (eased * 10);
+                portal.scale.set(portalScale, portalScale, portalScale);
 
                 // CAMERA PHYSICS
                 // 1. Initial Pull In (0 to -3)
@@ -282,8 +340,6 @@ export default function Preloader() {
             {/* Grain */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.06] z-11 mix-blend-overlay"
                 style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
-
-            {/* Instruction Text (Removed since it's automatic now) */}
         </div>
     );
 }
