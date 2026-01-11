@@ -115,7 +115,7 @@
     /* Heading styles */
     .heading-xl {
         font-family: 'Clash Display', sans-serif;
-        @apply font-bold text-[5rem] md:text-[12rem] leading-[0.85] uppercase;
+        @apply font-bold text-[13vw] md:text-[12rem] leading-[0.85] uppercase;
     }
 
     .heading-lg {
