@@ -48,23 +48,6 @@ export default function Preloader() {
 
         // ...
 
-        const animate = () => {
-            // ...
-            if (gameState.hasTriggered) {
-                // ...
-                // Sync 2D Flash Overlay
-                if (flashOverlay) {
-                    // Start flashing when doors open halfway
-                    if (eased > 0.2) {
-                        const opacity = Math.min((eased - 0.2) * 2, 1);
-                        flashOverlay.style.opacity = opacity.toString();
-                    }
-                }
-            }
-            // ...
-        }
-
-
         // --- 2. POST-PROCESSING (Bloom) ---
         const composer = new EffectComposer(renderer);
         const renderPass = new RenderPass(scene, camera);
