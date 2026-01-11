@@ -17,11 +17,13 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
  */
 export default function Preloader() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [isActive, setIsActive] = useState(false); // Triggers animation
-    const [isHidden, setIsHidden] = useState(false); // Unmounts component
+    const [isActive, setIsActive] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
+    const [isFading, setIsFading] = useState(false); // Controls opacity fade out
 
     useEffect(() => {
         if (!containerRef.current) return;
+
 
         const container = containerRef.current;
         let animationFrameId: number;
@@ -293,7 +295,7 @@ export default function Preloader() {
 
     return (
         <div
-            className="fixed inset-0 z-[100] bg-black select-none pointer-events-none"
+            className={`fixed inset-0 z-[100] bg-black select-none pointer-events-none transition-opacity duration-800 ease-out ${isFading ? 'opacity-0' : 'opacity-100'}`}
         >
             {/* Canvas Container */}
             <div ref={containerRef} className="absolute inset-0 block" />
