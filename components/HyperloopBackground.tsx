@@ -267,7 +267,7 @@ export default function HyperloopBackground() {
 
 
         // --- ANIMATION ---
-        const speed = 0.75;
+        const speed = 0.4; // Reduced from 0.75 for smoother, slower travel
         let time = 0;
 
         const handleMouseMove = (e: MouseEvent) => {
@@ -307,11 +307,13 @@ export default function HyperloopBackground() {
                 }
             });
 
-            const shake = (Math.random() - 0.5) * 0.02;
-            camera.rotation.y += (-mouseRef.current.x * 0.2 - camera.rotation.y) * 0.04;
-            camera.rotation.x += (-mouseRef.current.y * 0.2 - camera.rotation.x) * 0.04;
-            camera.position.y = Math.sin(time * 0.8) * 0.08 + shake;
-            camera.position.x = Math.cos(time * 0.6) * 0.08 + shake / 2;
+            // Reduced shake for smoother feel
+            const shake = (Math.random() - 0.5) * 0.005;
+            // Softer camera interpolation (0.04 -> 0.02)
+            camera.rotation.y += (-mouseRef.current.x * 0.2 - camera.rotation.y) * 0.02;
+            camera.rotation.x += (-mouseRef.current.y * 0.2 - camera.rotation.x) * 0.02;
+            camera.position.y = Math.sin(time * 0.5) * 0.05 + shake; // Slower bob
+            camera.position.x = Math.cos(time * 0.4) * 0.05 + shake / 2;
 
             headLamp.position.copy(camera.position);
             headLamp.target.position.set(camera.position.x, camera.position.y, camera.position.z - 40);

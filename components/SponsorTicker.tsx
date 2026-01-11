@@ -9,8 +9,8 @@
 const sponsors = [
     'Ansys',
     'Solidworks',
-    'Altium',
-    'MathWorks',
+    'Altium Designer',
+    'Bender',
     'SRM IST',
 ];
 
