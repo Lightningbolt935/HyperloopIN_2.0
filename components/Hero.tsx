@@ -59,7 +59,7 @@ export default function Hero() {
             <HyperloopBackground />
 
             {/* Content - EXACT brochure text */}
-            <div className="z-10 text-center px-4">
+            <div className="z-10 text-center px-6 md:px-0">
                 <div className="overflow-hidden">
                     <p
                         ref={subtitleRef}
