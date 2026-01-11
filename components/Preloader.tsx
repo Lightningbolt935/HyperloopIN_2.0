@@ -81,8 +81,8 @@ export default function Preloader() {
         createCeilingLight(0, 6, 2);
         createCeilingLight(3, 6, 2);
 
-        // Interior Tunnel Light (Hidden initially)
-        const tunnelLight = new THREE.PointLight(0xaabbcc, 0, 30);
+        // Interior Tunnel Light (Hidden initially) - GOLDEN LIGHT
+        const tunnelLight = new THREE.PointLight(0xffaa00, 0, 30);
         tunnelLight.position.set(0, 4, -10);
         scene.add(tunnelLight);
 
@@ -298,7 +298,7 @@ export default function Preloader() {
 
     return (
         <div
-            className={`fixed inset-0 z-[100] bg-black select-none pointer-events-none transition-opacity duration-800 ease-out ${isFading ? 'opacity-0' : 'opacity-100'}`}
+            className="fixed inset-0 z-[100] bg-black select-none pointer-events-none"
         >
             {/* Canvas Container */}
             <div ref={containerRef} className="absolute inset-0 block" />
