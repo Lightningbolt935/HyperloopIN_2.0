@@ -224,21 +224,26 @@ export default function Preloader() {
                     doorRight.position.x = (maxOpen * eased) - grind;
 
                     // Reveal Interior Light
-                    tunnelLight.intensity = eased * 1.5;
+                    // Light Burst Effect: Ramps up exponentially as doors fully open
+                    const lightBurst = Math.pow(eased, 8) * 50.0;
+                    tunnelLight.intensity = (eased * 1.5) + lightBurst;
+                    tunnelLight.distance = 30 + (eased * 100);
 
                     // Pulling In Effect: Camera moves forward (Z axis)
-                    const pullInAmount = eased * 10;
+                    // Warp Speed: Accelerate significantly at the end
+                    const warpSpeed = Math.pow(eased, 4) * 5;
+                    const pullInAmount = (eased * 10) + warpSpeed;
                     camZ = 12 - pullInAmount;
 
-                    // Camera Shake
-                    const currentShake = 0.03 * Math.sin(eased * Math.PI);
+                    // Camera Shake - Increases with speed
+                    const currentShake = (0.03 + (warpSpeed * 0.01)) * Math.sin(eased * Math.PI);
                     camX += (Math.random() - 0.5) * currentShake;
                     camY += (Math.random() - 0.5) * currentShake;
                 }
             }
 
             camera.position.set(camX, camY, camZ);
-            camera.lookAt(0, 1.5, 0);
+            camera.lookAt(0, 1.5, 0); // Keep focus down the tunnel
 
             composer.render();
         };
