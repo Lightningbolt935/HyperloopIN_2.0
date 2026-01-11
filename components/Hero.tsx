@@ -24,21 +24,25 @@ export default function Hero() {
 
                 tl.to(subtitleRef.current, {
                     y: 0,
+                    opacity: 1,
                     duration: 1,
                     ease: 'power4.out'
                 })
                     .to(title1Ref.current, {
                         y: 0,
+                        opacity: 1,
                         duration: 1,
                         ease: 'power4.out'
                     }, '-=0.8')
                     .to(title2Ref.current, {
                         y: 0,
+                        opacity: 1,
                         duration: 1,
                         ease: 'power4.out'
                     }, '-=0.8')
                     .to(title3Ref.current, {
                         y: 0,
+                        opacity: 1,
                         duration: 1,
                         ease: 'power4.out'
                     }, '-=0.8')
@@ -46,7 +50,7 @@ export default function Hero() {
                         scale: 1.2,
                         duration: 2
                     }, '-=1.5');
-            }, 2500);
+            }, 1800); // Reduced delay to sync with Golden Flash
         }
     }, []);
 
@@ -63,7 +67,7 @@ export default function Hero() {
                 <div className="overflow-hidden">
                     <p
                         ref={subtitleRef}
-                        className="text-blue-500 font-bold tracking-[0.4em] text-xs uppercase mb-4 translate-y-full"
+                        className="text-blue-500 font-bold tracking-[0.4em] text-xs uppercase mb-4 translate-y-full opacity-0"
                     >
                         SRM Institute of Science & Technology
                     </p>
@@ -71,7 +75,7 @@ export default function Hero() {
                 <div className="overflow-hidden">
                     <h1
                         ref={title1Ref}
-                        className="heading-xl translate-y-full"
+                        className="heading-xl translate-y-full opacity-0"
                     >
                         HYPERLOOPIN
                     </h1>
@@ -79,7 +83,7 @@ export default function Hero() {
                 <div className="overflow-hidden mt-4">
                     <h2
                         ref={title2Ref}
-                        className="text-4xl md:text-6xl font-bold heading-font text-gray-400 translate-y-full"
+                        className="text-4xl md:text-6xl font-bold heading-font text-gray-400 translate-y-full opacity-0"
                     >
                         WHERE
                     </h2>
@@ -87,7 +91,7 @@ export default function Hero() {
                 <div className="overflow-hidden">
                     <h2
                         ref={title3Ref}
-                        className="text-4xl md:text-6xl font-bold heading-font text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-white translate-y-full"
+                        className="text-4xl md:text-6xl font-bold heading-font text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-white translate-y-full opacity-0"
                     >
                         INNOVATION MEETS VELOCITY
                     </h2>
