@@ -172,6 +172,13 @@ export default function Preloader() {
         keypad.add(padBase); keypad.position.set(4.5, 0, 0.8);
         doorRight.add(keypad);
 
+        // GOLDEN PORTAL (The visible light source)
+        const portalGeo = new THREE.SphereGeometry(4, 32, 32);
+        const portalMat = new THREE.MeshBasicMaterial({ color: 0xffaa00, transparent: true, opacity: 0 }); // Start hidden
+        const portal = new THREE.Mesh(portalGeo, portalMat);
+        portal.position.set(0, 1.5, -5); // Behind doors
+        scene.add(portal);
+
         // Tunnel
         const tunnelGeo = new THREE.BoxGeometry(16, 1, 50);
         const floor = new THREE.Mesh(tunnelGeo, darkerMetalMaterial); floor.position.set(0, -7.5, -25); floor.receiveShadow = true; scene.add(floor);
@@ -235,6 +242,11 @@ export default function Preloader() {
                 const lightBurst = Math.pow(eased, 8) * 50.0;
                 tunnelLight.intensity = (eased * 1.5) + lightBurst;
                 tunnelLight.distance = 30 + (eased * 100);
+
+                // Animate Portal Mesh (Expand to engulf camera)
+                portalMat.opacity = Math.pow(eased, 3); // Fade in
+                const portalScale = 1 + (eased * 10);
+                portal.scale.set(portalScale, portalScale, portalScale);
 
                 // CAMERA PHYSICS
                 // 1. Initial Pull In (0 to -3)
