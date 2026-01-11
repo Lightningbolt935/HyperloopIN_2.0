@@ -194,25 +194,20 @@ export default function Preloader() {
         };
 
         const labelGeo = new THREE.PlaneGeometry(4, 2);
-        const hyperMat = new THREE.MeshBasicMaterial({ map: createTextTexture('HYPER'), transparent: true, opacity: 0.8 });
-        const loopinMat = new THREE.MeshBasicMaterial({ map: createTextTexture('LOOPIN'), transparent: true, opacity: 0.8 });
+        const hyperMat = new THREE.MeshBasicMaterial({ map: createTextTexture('HYPER'), transparent: true, opacity: 0.8, side: THREE.DoubleSide });
+        const loopinMat = new THREE.MeshBasicMaterial({ map: createTextTexture('LOOPIN'), transparent: true, opacity: 0.8, side: THREE.DoubleSide });
 
         const hyperLabel = new THREE.Mesh(labelGeo, hyperMat);
-        hyperLabel.position.set(2.5, 1, 0.61); // Right side of Left Door
+
+        // Correcting positions based on door geometry
+        // Moving Z to 0.75 to clear bevel
+        // Moving X to -2.0 so right edge (at +2.0 relative) is at 0.
+        hyperLabel.position.set(-2.0, 0, 0.75);
         doorLeft.add(hyperLabel);
 
         const loopinLabel = new THREE.Mesh(labelGeo, loopinMat);
-        loopinLabel.position.set(2.5, 1, 0.61); // Left side of Right Door? adjust position
-        // doorRight moves +x, doorLeft moves -x.
-        // doorRight geometry starts at 0 and goes +w. 
-        // doorLeft starts at 0 and goes -w.
-
-        // Correcting positions based on door geometry
-        // doorLeft shape: 0 to -w. We want "HYPER" on the right edge of doorLeft (near 0).
-        hyperLabel.position.set(-2.5, 0, 0.61);
-
-        // doorRight shape: 0 to +w. We want "LOOPIN" on the left edge of doorRight (near 0).
-        loopinLabel.position.set(2.5, 0, 0.61);
+        // Moving X to 2.0 so left edge (at -2.0 relative) is at 0.
+        loopinLabel.position.set(2.0, 0, 0.75);
         doorRight.add(loopinLabel);
 
 
