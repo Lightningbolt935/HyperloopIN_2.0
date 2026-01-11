@@ -4,10 +4,7 @@ import { DefaultSeo } from 'next-seo';
 import dynamic from 'next/dynamic';
 import '@/styles/globals.css';
 
-// Dynamic import for background to avoid SSR issues
-const HyperloopBackground = dynamic(() => import('@/components/HyperloopBackground'), {
-    ssr: false,
-});
+
 
 // Font configurations
 const inter = Inter({
@@ -91,15 +88,19 @@ const defaultSEO = {
  * - Global animated background
  * - Global styles
  */
+// Dynamic import for SmoothScroll to avoid SSR issues
+const SmoothScroll = dynamic(() => import('@/components/SmoothScroll'), {
+    ssr: false,
+});
+
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
             <DefaultSeo {...defaultSEO} />
             <div className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} font-sans`}>
+                <SmoothScroll />
                 {/* Global animated background */}
-                <div className="fixed inset-0 z-0">
-                    <HyperloopBackground />
-                </div>
+
                 {/* Page content */}
                 <div className="relative z-10">
                     <Component {...pageProps} />

@@ -1,372 +1,257 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* DesignX2 Dark Theme - Hyperloopin */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=clash-display@400,600,700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom base styles */
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    @apply bg-background-light dark:bg-background-dark text-neutral-900 dark:text-neutral-100;
-    @apply font-sans transition-colors duration-300;
-  }
-
-  /* Selection styles */
-  ::selection {
-    @apply bg-primary-500/30 text-primary-900 dark:text-primary-100;
-  }
-
-  /* Focus styles for accessibility */
-  *:focus-visible {
-    @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark;
-  }
-
-  /* Scrollbar styling */
-  ::-webkit-scrollbar {
-    @apply w-2;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-neutral-100 dark:bg-neutral-900;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-neutral-300 dark:bg-neutral-700 rounded-full;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-neutral-400 dark:bg-neutral-600;
-  }
+/* CSS Variables */
+:root {
+    --bg-color: #030303;
+    --bg-secondary: #050505;
+    --accent: #2563eb;
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    --text-dark: #4b5563;
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --glass-bg: rgba(255, 255, 255, 0.03);
 }
 
-/* Component layer for reusable classes */
+/* Base Styles */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: 'Satoshi', sans-serif;
+        overflow-x: hidden;
+        cursor: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .heading-font {
+        font-family: 'Clash Display', sans-serif;
+    }
+
+    /* Selection */
+    ::selection {
+        background: rgba(37, 99, 235, 0.3);
+        color: white;
+    }
+
+    /* Focus styles */
+    *:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    /* Hide scrollbar */
+    ::-webkit-scrollbar {
+        width: 0px;
+    }
+}
+
+/* Component Styles */
 @layer components {
 
-  /* Glass morphism card */
-  .glass-card {
-    @apply bg-white/70 dark:bg-neutral-900/70;
-    @apply backdrop-blur-xl;
-    @apply border border-white/20 dark:border-neutral-700/50;
-    @apply shadow-glass;
-    @apply rounded-2xl;
-  }
+    /* Glass Card */
+    .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border-subtle);
+    }
 
-  /* Gradient text */
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    @apply bg-gradient-to-r from-primary-500 via-accent-500 to-primary-600;
-    background-size: 200% 200%;
-    animation: gradient 8s ease infinite;
-  }
+    /* Gradient Text */
+    .gradient-text {
+        background: linear-gradient(to right, #6b7280, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
 
-  /* ========================================
-     PREMIUM BUTTON STYLES
-     Ultra-polished buttons with refined animations
-     ======================================== */
+    /* Bento Grid */
+    .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: minmax(200px, auto);
+        gap: 20px;
+    }
 
-  /* Primary Button - Solid with animated glow */
-  .btn-primary {
-    @apply relative inline-flex items-center justify-center gap-2;
-    @apply px-8 py-4 rounded-full;
-    @apply text-white font-bold text-sm uppercase tracking-widest;
-    @apply cursor-pointer select-none;
-    @apply overflow-hidden;
-    background: linear-gradient(135deg, #133457 0%, #1a4a7a 100%);
-    box-shadow: 0 4px 20px rgba(19, 52, 87, 0.4);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
+    /* Primary Button - Rounded Pill */
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2;
+        @apply px-6 py-3 rounded-full;
+        @apply text-sm font-medium uppercase tracking-widest;
+        @apply border border-white/20;
+        @apply bg-transparent text-white;
+        @apply transition-all duration-300;
+        @apply cursor-none;
+    }
 
-  /* Shine effect */
-  .btn-primary::before {
-    content: '';
-    @apply absolute top-0 -left-full w-full h-full;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.6s ease;
-  }
+    .btn-primary:hover {
+        @apply bg-white text-black;
+    }
 
-  .btn-primary:hover::before {
-    left: 100%;
-  }
+    /* Section Container */
+    .section-container {
+        @apply max-w-[95vw] mx-auto px-4 md:px-8;
+    }
 
-  .btn-primary:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow:
-      0 10px 30px rgba(19, 52, 87, 0.5),
-      0 0 50px rgba(19, 52, 87, 0.2);
-  }
+    /* Section Padding */
+    .section-padding {
+        @apply py-20 md:py-32 lg:py-40;
+    }
 
-  .btn-primary:active {
-    transform: translateY(-1px) scale(0.98);
-    transition: all 0.1s ease;
-  }
+    /* Heading styles */
+    .heading-xl {
+        font-family: 'Clash Display', sans-serif;
+        @apply font-bold text-[5rem] md:text-[12rem] leading-[0.85] uppercase;
+    }
 
-  .btn-primary:focus-visible {
-    @apply outline-none;
-    box-shadow:
-      0 0 0 3px #fff,
-      0 0 0 6px #133457,
-      0 10px 30px rgba(19, 52, 87, 0.5);
-  }
+    .heading-lg {
+        font-family: 'Clash Display', sans-serif;
+        @apply font-bold text-6xl md:text-9xl uppercase leading-none;
+    }
 
-  /* Secondary Button - Glass outline */
-  .btn-secondary {
-    @apply relative inline-flex items-center justify-center gap-2;
-    @apply px-8 py-4 rounded-full;
-    @apply font-bold text-sm uppercase tracking-widest;
-    @apply transition-all duration-300 ease-out;
-    @apply cursor-pointer select-none;
-    color: #133457;
-    background: transparent;
-    border: 2px solid #133457;
-  }
+    .heading-md {
+        font-family: 'Clash Display', sans-serif;
+        @apply font-bold text-4xl md:text-7xl uppercase;
+    }
 
-  .btn-secondary::before {
-    content: '';
-    @apply absolute inset-0 rounded-full;
-    background: #133457;
-    transform: scaleX(0);
-    transform-origin: right;
-    @apply transition-transform duration-300 ease-out;
-    z-index: -1;
-  }
+    .heading-sm {
+        font-family: 'Clash Display', sans-serif;
+        @apply font-semibold text-2xl md:text-4xl uppercase;
+    }
 
-  .btn-secondary:hover {
-    color: #fff;
-    border-color: #133457;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(19, 52, 87, 0.3);
-  }
-
-  .btn-secondary:hover::before {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-
-  .btn-secondary:active {
-    transform: translateY(0);
-  }
-
-  /* Tertiary Button - Minimal with underline */
-  .btn-tertiary {
-    @apply relative inline-flex items-center justify-center gap-2;
-    @apply px-4 py-2;
-    @apply font-semibold text-sm;
-    @apply transition-all duration-300;
-    @apply cursor-pointer select-none;
-    color: #133457;
-    background: transparent;
-  }
-
-  .btn-tertiary::after {
-    content: '';
-    @apply absolute bottom-0 left-0 right-0 h-0.5;
-    background: #133457;
-    transform: scaleX(0);
-    transform-origin: right;
-    @apply transition-transform duration-300 ease-out;
-  }
-
-  .btn-tertiary:hover {
-    color: #1a4a7a;
-  }
-
-  .btn-tertiary:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-
-  /* Icon Button - Circular with glow */
-  .btn-icon {
-    @apply relative inline-flex items-center justify-center;
-    @apply w-12 h-12 rounded-full;
-    @apply transition-all duration-300 ease-out;
-    @apply cursor-pointer select-none;
-    color: #133457;
-    background: rgba(19, 52, 87, 0.1);
-  }
-
-  .btn-icon:hover {
-    color: #fff;
-    background: #133457;
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(19, 52, 87, 0.4);
-  }
-
-  .btn-icon:active {
-    transform: translateY(0) scale(0.95);
-  }
-
-  /* Ghost Button - Subtle hover */
-  .btn-ghost {
-    @apply relative inline-flex items-center justify-center gap-2;
-    @apply px-6 py-3 rounded-xl;
-    @apply font-semibold text-sm;
-    @apply transition-all duration-300;
-    @apply cursor-pointer select-none;
-    color: #133457;
-    background: transparent;
-  }
-
-  .btn-ghost:hover {
-    background: rgba(19, 52, 87, 0.08);
-  }
-
-  .btn-ghost:active {
-    background: rgba(19, 52, 87, 0.15);
-  }
-
-  /* Section container */
-  .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Section padding */
-  .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
-  }
-
-  /* Card hover effect */
-  .card-hover {
-    @apply transition-all duration-300;
-    @apply hover:-translate-y-2;
-    @apply hover:shadow-xl hover:shadow-primary-500/10;
-  }
-
-  /* Heading styles */
-  .heading-xl {
-    @apply font-display font-bold text-4xl md:text-5xl lg:text-6xl;
-    @apply tracking-tight;
-  }
-
-  .heading-lg {
-    @apply font-display font-bold text-3xl md:text-4xl lg:text-5xl;
-    @apply tracking-tight;
-  }
-
-  .heading-md {
-    @apply font-display font-semibold text-2xl md:text-3xl;
-    @apply tracking-tight;
-  }
-
-  .heading-sm {
-    @apply font-display font-semibold text-xl md:text-2xl;
-    @apply tracking-tight;
-  }
-
-  /* Glow effect */
-  .glow-effect {
-    @apply relative;
-  }
-
-  .glow-effect::before {
-    content: '';
-    @apply absolute inset-0 -z-10;
-    @apply bg-gradient-to-r from-primary-500/20 to-accent-500/20;
-    @apply blur-3xl opacity-0;
-    @apply transition-opacity duration-500;
-  }
-
-  .glow-effect:hover::before {
-    @apply opacity-100;
-  }
+    /* Hover Trigger for cursor */
+    .hover-trigger {
+        cursor: none;
+    }
 }
 
-/* Utility layer for custom utilities */
+/* Custom Cursor Styles */
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: white;
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+.cursor-outline.hovering {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Preloader Styles */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preloader.hidden {
+    transform: translateY(-100%);
+}
+
+.counter {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 8rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 20s linear infinite;
+}
+
+/* Utility Classes */
 @layer utilities {
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 
-  /* Hide scrollbar but keep functionality */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
 
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
 
-  /* Backdrop saturate */
-  .backdrop-saturate-150 {
-    backdrop-filter: saturate(150%) blur(12px);
-  }
-
-  /* Text balance */
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Animation delay utilities */
-  .animation-delay-100 {
-    animation-delay: 100ms;
-  }
-
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .animation-delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .animation-delay-500 {
-    animation-delay: 500ms;
-  }
-
-  /* Grid pattern background */
-  .bg-grid-pattern {
-    background-image:
-      linear-gradient(to right, rgba(249, 115, 22, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(249, 115, 22, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  /* Radial gradient overlay */
-  .bg-radial-gradient {
-    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(249, 115, 22, 0.15), transparent);
-  }
-}
-
-/* Custom animations using CSS */
-@keyframes gradient {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+    /* Mix blend mode */
+    .mix-blend-difference {
+        mix-blend-mode: difference;
+    }
 }
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
 
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Mobile cursor fix */
+@media (max-width: 768px) {
+    body {
+        cursor: auto;
+    }
+
+    .cursor-dot,
+    .cursor-outline {
+        display: none;
+    }
 }

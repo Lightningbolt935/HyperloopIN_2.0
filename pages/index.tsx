@@ -1,76 +1,83 @@
-import { GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
+import dynamic from 'next/dynamic';
 
-// Components
+// Static Components
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import SponsorTicker from '@/components/SponsorTicker';
 import About from '@/components/About';
+import Domains from '@/components/Domains';
+import WhatIsHyperloop from '@/components/WhatIsHyperloop';
 import Team from '@/components/Team';
-import Timeline from '@/components/Timeline';
 import Gallery from '@/components/Gallery';
 import Mentors from '@/components/Mentors';
 import Sponsors from '@/components/Sponsors';
-import NewsList, { type NewsPost } from '@/components/NewsList';
-import ContactForm from '@/components/ContactForm';
+import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import ScrollToTopButton from '@/components/ScrollToTopButton';
 
-// Data
-import { getAllNewsPosts } from '@/lib/mdx';
-
-interface HomeProps {
-    recentPosts: NewsPost[];
-}
+// Dynamic Components (client-side only)
+const Preloader = dynamic(() => import('@/components/Preloader'), { ssr: false });
+const CustomCursor = dynamic(() => import('@/components/CustomCursor'), { ssr: false });
 
 /**
- * Homepage
+ * Homepage - DesignX2 Style + Brochure Content
  * 
- * Static generation with getStaticProps for optimal performance.
- * All sections are composed here with smooth scroll navigation.
+ * Complete redesign with:
+ * - Dark futuristic aesthetic
+ * - Replicates reference site structure
+ * - GSAP animations
  */
-export default function Home({ recentPosts }: HomeProps) {
+export default function Home() {
     return (
         <>
             <NextSeo
-                title="Home"
-                description="Hyperloopin is a university engineering club pioneering hyperloop technology. Join us in building the future of sustainable high-speed transportation."
+                title="HYPERLOOPIN | Where Innovation Meets Velocity"
+                description="A student-led technical club at SRM working to design, build, and innovate Hyperloop pods for global competitions like the European Hyperloop Week."
             />
 
-            <main className="relative">
+            {/* Preloader */}
+            <Preloader />
+
+            {/* Custom Cursor */}
+            <CustomCursor />
+
+            <main className="relative bg-[#030303]">
                 {/* Navigation */}
                 <Navbar />
 
-                {/* Main sections */}
+                {/* Hero Section */}
                 <Hero />
+
+                {/* Sponsor Ticker */}
+                <SponsorTicker />
+
+                {/* What Is Hyperloop Section */}
+                <WhatIsHyperloop />
+
+                {/* About Section */}
                 <About />
+
+                {/* Domains Section */}
+                <Domains />
+
+                {/* Team Section */}
                 <Team />
-                <Timeline />
+
+                {/* Gallery Section */}
                 <Gallery />
+
+                {/* Mentors Section */}
                 <Mentors />
+
+                {/* Sponsors Section */}
                 <Sponsors />
-                <NewsList posts={recentPosts} />
-                <ContactForm />
+
+                {/* Contact Section - Lets Connect */}
+                <Contact />
 
                 {/* Footer */}
                 <Footer />
-
-                {/* Scroll to top button */}
-                <ScrollToTopButton />
             </main>
         </>
     );
 }
-
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-    // Get recent news posts for the homepage (limit to 3)
-    const allPosts = getAllNewsPosts();
-    const recentPosts = allPosts.slice(0, 3);
-
-    return {
-        props: {
-            recentPosts,
-        },
-        // Revalidate every hour for ISR (optional, can remove for pure SSG)
-        // revalidate: 3600,
-    };
-};

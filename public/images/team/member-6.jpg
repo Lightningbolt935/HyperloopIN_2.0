@@ -1,5 +1,0 @@
-<svg width="400" height="500" xmlns="http://www.w3.org/2000/svg">
-  <rect width="400" height="500" fill="#06b6d4"/>
-  <circle cx="200" cy="180" r="80" fill="rgba(255,255,255,0.2)"/>
-  <text x="200" y="320" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="500" fill="white">Team Member</text>
-</svg>

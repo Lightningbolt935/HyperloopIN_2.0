@@ -1,12 +1,13 @@
 // Site-wide constants and configuration
 export const siteConfig = {
     name: 'Hyperloopin',
-    tagline: 'Engineering the Future of Transportation',
-    description: 'A university engineering club dedicated to building the next generation of high-speed transportation through innovation, collaboration, and cutting-edge technology.',
+    tagline: 'Where Innovation Meets Velocity',
+    description: 'A student-led technical club at SRM working to design, build, and innovate Hyperloop pods for global competitions like the European Hyperloop Week. Our mission is to build, innovate, compete and empower.',
     url: 'https://hyperloopin.edu',
-    email: 'contact@hyperloopin.edu',
-    phone: '+91 98765 43210',
-    address: 'Engineering Building, University Campus, City - 110001',
+    email: 'hploop25@gmail.com',
+    phone: '+91 72084 83644',
+    instagram: '@hyperloopinsrm',
+    address: 'SRM Institute of Science and Technology, Chennai',
 
     // SEO
     seo: {
