@@ -267,7 +267,7 @@ export default function HyperloopBackground() {
 
 
         // --- ANIMATION ---
-        const speed = 0.4; // Reduced from 0.75 for smoother, slower travel
+        const speed = 0.1; // Reduced from 0.4 for a much slower, relaxed pace
         let time = 0;
 
         const handleMouseMove = (e: MouseEvent) => {
@@ -278,7 +278,7 @@ export default function HyperloopBackground() {
 
         function animate() {
             animationRef.current = requestAnimationFrame(animate);
-            time += 0.01;
+            time += 0.005; // Slower time scaling (was 0.01)
 
             segments.forEach((seg) => {
                 seg.position.z += speed;
