@@ -207,8 +207,11 @@ export default function Preloader() {
                     gameState.doorOpenProgress += 0.006; // Opening Speed
                     if (gameState.doorOpenProgress >= 1) {
                         gameState.doorOpenProgress = 1;
-                        // Animation Complete - Hide Component
-                        setTimeout(() => setIsHidden(true), 800);
+                        // Animation Complete - Hide Component and STOP LOOP
+                        setTimeout(() => {
+                            setIsHidden(true);
+                            cancelAnimationFrame(animationFrameId); // STOP THE LOOP
+                        }, 800);
                     }
 
                     const eased = easeInOutCubic(gameState.doorOpenProgress);
@@ -224,11 +227,10 @@ export default function Preloader() {
                     tunnelLight.intensity = eased * 1.5;
 
                     // Pulling In Effect: Camera moves forward (Z axis)
-                    // Start at 12, move to 2 (through the doors)
-                    const pullInAmount = eased * 10; // Move 10 units forward
+                    const pullInAmount = eased * 10;
                     camZ = 12 - pullInAmount;
 
-                    // Heavy Shake Logic (strongest in middle)
+                    // Camera Shake
                     const currentShake = 0.03 * Math.sin(eased * Math.PI);
                     camX += (Math.random() - 0.5) * currentShake;
                     camY += (Math.random() - 0.5) * currentShake;
@@ -255,7 +257,19 @@ export default function Preloader() {
         return () => {
             cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', handleResize);
+
+            // Manual Resource Disposal
             renderer.dispose();
+            composer.dispose();
+            scene.traverse((object) => {
+                if (object instanceof THREE.Mesh) {
+                    object.geometry.dispose();
+                    if (object.material instanceof THREE.Material) {
+                        object.material.dispose();
+                    }
+                }
+            });
+
             if (container.contains(renderer.domElement)) {
                 container.removeChild(renderer.domElement);
             }
