@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import gsap from 'gsap';
 import HyperloopBackground from './HyperloopBackground';
 
 /**
@@ -16,42 +17,48 @@ export default function Hero() {
     const bgRef = useRef<HTMLImageElement>(null);
 
     useEffect(() => {
-        if (typeof window !== 'undefined' && (window as any).gsap) {
-            const gsap = (window as any).gsap;
+        // Ensure starting state is consistent (in case CSS opacity-0 is missing or overridden)
+        gsap.set([subtitleRef.current, title1Ref.current, title2Ref.current, title3Ref.current], {
+            opacity: 0,
+            y: 50 // Ensure consistent starting Y position
+        });
 
-            setTimeout(() => {
-                const tl = gsap.timeline();
+        setTimeout(() => {
+            const tl = gsap.timeline();
 
-                tl.to(subtitleRef.current, {
+            tl.to(subtitleRef.current, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                ease: 'power4.out'
+            })
+                .to(title1Ref.current, {
                     y: 0,
                     opacity: 1,
                     duration: 1,
                     ease: 'power4.out'
-                })
-                    .to(title1Ref.current, {
-                        y: 0,
-                        opacity: 1,
-                        duration: 1,
-                        ease: 'power4.out'
-                    }, '-=0.8')
-                    .to(title2Ref.current, {
-                        y: 0,
-                        opacity: 1,
-                        duration: 1,
-                        ease: 'power4.out'
-                    }, '-=0.8')
-                    .to(title3Ref.current, {
-                        y: 0,
-                        opacity: 1,
-                        duration: 1,
-                        ease: 'power4.out'
-                    }, '-=0.8')
-                    .from(bgRef.current, {
-                        scale: 1.2,
-                        duration: 2
-                    }, '-=1.5');
-            }, 1800); // Reduced delay to sync with Golden Flash
-        }
+                }, '-=0.8')
+                .to(title2Ref.current, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power4.out'
+                }, '-=0.8')
+                .to(title3Ref.current, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    ease: 'power4.out'
+                }, '-=0.8');
+
+            // Background scale animation (if ref exists)
+            if (bgRef.current) {
+                tl.from(bgRef.current, {
+                    scale: 1.2,
+                    duration: 2
+                }, '-=1.5');
+            }
+        }, 1800); // Sync with preloader
     }, []);
 
     return (
