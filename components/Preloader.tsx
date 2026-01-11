@@ -203,43 +203,51 @@ export default function Preloader() {
             }
 
             if (gameState.hasTriggered) {
+                // Phase 1: Opening Doors
                 if (gameState.doorOpenProgress < 1) {
-                    gameState.doorOpenProgress += 0.006; // Opening Speed
+                    gameState.doorOpenProgress += 0.006;
                     if (gameState.doorOpenProgress >= 1) {
                         gameState.doorOpenProgress = 1;
-                        // Animation Complete - Hide Component and STOP LOOP
+                        // Start Fly-Through and Hide after short burst
                         setTimeout(() => {
                             setIsHidden(true);
-                            cancelAnimationFrame(animationFrameId); // STOP THE LOOP
-                        }, 800);
+                            cancelAnimationFrame(animationFrameId);
+                        }, 300); // reduced from 800ms for speed
                     }
-
-                    const eased = easeInOutCubic(gameState.doorOpenProgress);
-                    const maxOpen = 6.5;
-
-                    // Door Vibration (Grinding)
-                    const grind = Math.sin(Date.now() * 0.8) * 0.01 * (1 - eased);
-
-                    doorLeft.position.x = (-maxOpen * eased) + grind;
-                    doorRight.position.x = (maxOpen * eased) - grind;
-
-                    // Reveal Interior Light
-                    // Light Burst Effect: Ramps up exponentially as doors fully open
-                    const lightBurst = Math.pow(eased, 8) * 50.0;
-                    tunnelLight.intensity = (eased * 1.5) + lightBurst;
-                    tunnelLight.distance = 30 + (eased * 100);
-
-                    // Pulling In Effect: Camera moves forward (Z axis)
-                    // Warp Speed: Accelerate significantly at the end
-                    const warpSpeed = Math.pow(eased, 4) * 5;
-                    const pullInAmount = (eased * 10) + warpSpeed;
-                    camZ = 12 - pullInAmount;
-
-                    // Camera Shake - Increases with speed
-                    const currentShake = (0.03 + (warpSpeed * 0.01)) * Math.sin(eased * Math.PI);
-                    camX += (Math.random() - 0.5) * currentShake;
-                    camY += (Math.random() - 0.5) * currentShake;
                 }
+
+                // Phase 2: Continuous Fly-Through (Even after doors open)
+                const eased = easeInOutCubic(gameState.doorOpenProgress);
+                const maxOpen = 6.5;
+
+                // Door Vibration (Grinding)
+                const grind = Math.sin(Date.now() * 0.8) * 0.01 * (1 - eased);
+
+                doorLeft.position.x = (-maxOpen * eased) + grind;
+                doorRight.position.x = (maxOpen * eased) - grind;
+
+                // Reveal Interior Light & Light Burst
+                const lightBurst = Math.pow(eased, 8) * 50.0;
+                tunnelLight.intensity = (eased * 1.5) + lightBurst;
+                tunnelLight.distance = 30 + (eased * 100);
+
+                // CAMERA PHYSICS
+                // 1. Initial Pull In (0 to -3)
+                const warpSpeed = Math.pow(eased, 4) * 5;
+                let baseZ = 12 - ((eased * 10) + warpSpeed);
+
+                // 2. Extra Fly-Through Momentum (when fully open)
+                if (gameState.doorOpenProgress >= 1) {
+                    // Move exponentially faster into the void
+                    baseZ -= 0.5; // continuous forward movement per frame
+                }
+
+                camZ = baseZ;
+
+                // Camera Shake - Increases with speed
+                const currentShake = (0.03 + (warpSpeed * 0.01)) * Math.sin(eased * Math.PI);
+                camX += (Math.random() - 0.5) * currentShake;
+                camY += (Math.random() - 0.5) * currentShake;
             }
 
             camera.position.set(camX, camY, camZ);
