@@ -32,7 +32,7 @@ export default function Navbar() {
     };
 
     return (
-        <nav className={`fixed top-0 w-full z-50 px-8 py-4 flex justify-between items-center transition-all duration-300 border-b border-blue-500/50 shadow-[0_0_25px_rgba(59,130,246,0.8)] ${isScrolled ? 'bg-black/80 backdrop-blur-md py-2' : 'py-4'
+        <nav className={`fixed top-0 w-full z-50 px-8 py-4 flex justify-between items-center transition-all duration-300 border-b border-blue-500/50 shadow-[0_0_25px_rgba(59,130,246,0.8)] ${isScrolled ? 'bg-black backdrop-blur-md py-2' : 'py-4'
             }`}>
             {/* Logo */}
             <Link
