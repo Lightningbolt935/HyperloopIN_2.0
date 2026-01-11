@@ -15,7 +15,7 @@ export default function Contact() {
             <div className="max-w-[95vw] mx-auto">
                 <div className="mb-16 border-b border-white/10 pb-8">
                     <h2 className="heading-lg tracking-tight text-white">
-                        LET'S CONNECT
+                        LET&apos;S CONNECT
                     </h2>
                 </div>
 

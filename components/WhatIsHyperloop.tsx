@@ -42,13 +42,13 @@ export default function WhatIsHyperloop() {
 
                             <div className="py-6">
                                 <p className="text-3xl md:text-5xl text-white">
-                                    🌀🌍 It's not sci-fi <span className="text-blue-400 font-bold">it's Hyperloop</span>:
+                                    🌀🌍 It&apos;s not sci-fi <span className="text-blue-400 font-bold">it&apos;s Hyperloop</span>:
                                 </p>
                             </div>
 
                             <blockquote className="border-l-8 border-purple-500 pl-10 py-4">
                                 <p className="text-3xl md:text-4xl text-white italic leading-relaxed">
-                                    "A floating capsule racing through an airless tunnel, powered by magnets and dreams."
+                                    &quot;A floating capsule racing through an airless tunnel, powered by magnets and dreams.&quot;
                                 </p>
                             </blockquote>
 
