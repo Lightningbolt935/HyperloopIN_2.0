@@ -32,18 +32,18 @@ export default function Navbar() {
     };
 
     return (
-        <nav className={`fixed top-0 w-full z-50 px-8 py-2 flex justify-between items-center transition-all duration-300 border-b border-blue-500/50 shadow-[0_0_25px_rgba(59,130,246,0.8)] ${isScrolled ? 'bg-black backdrop-blur-md py-1' : 'py-3'
+        <nav className={`fixed top-0 w-full z-50 px-8 py-3 flex justify-between items-center transition-all duration-300 border-b border-blue-500/50 shadow-[0_0_25px_rgba(59,130,246,0.8)] ${isScrolled ? 'bg-black backdrop-blur-md py-2' : 'py-5'
             }`}>
             {/* Logo */}
             <Link
                 href="/"
                 className="hover-trigger"
             >
-                <div className="bg-white rounded-lg px-2 py-1">
+                <div className="bg-white rounded-lg px-3 py-1.5">
                     <img
                         src="/images/logo.png"
                         alt="Hyperloopin"
-                        className="h-10 w-auto object-contain"
+                        className="h-12 w-auto object-contain"
                     />
                 </div>
             </Link>
