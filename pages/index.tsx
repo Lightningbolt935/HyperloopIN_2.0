@@ -16,7 +16,10 @@ import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 // Dynamic Components (client-side only)
-const Preloader = dynamic(() => import('@/components/Preloader'), { ssr: false });
+const Preloader = dynamic(() => import('@/components/Preloader'), {
+    ssr: false,
+    loading: () => <div className="fixed inset-0 z-[10000] bg-black" />
+});
 const CustomCursor = dynamic(() => import('@/components/CustomCursor'), { ssr: false });
 
 /**

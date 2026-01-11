@@ -186,7 +186,7 @@ export default function Preloader() {
         // Auto-trigger sequence after a short delay
         setTimeout(() => {
             document.body.classList.add('preloader-active');
-        }, 1500);
+        }, 500);
 
         const animate = () => {
             animationFrameId = requestAnimationFrame(animate);
