@@ -11,63 +11,54 @@ import { useEffect, useRef } from 'react';
  * - Expands on hover over interactive elements
  */
 export default function CustomCursor() {
-    const dotRef = useRef<HTMLDivElement>(null);
-    const outlineRef = useRef<HTMLDivElement>(null);
+    const cursorRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const dot = dotRef.current;
-        const outline = outlineRef.current;
-
-        if (!dot || !outline) return;
+        const cursor = cursorRef.current;
+        if (!cursor) return;
 
         const handleMouseMove = (e: MouseEvent) => {
             const posX = e.clientX;
             const posY = e.clientY;
 
-            // Dot follows instantly
-            dot.style.left = `${posX}px`;
-            dot.style.top = `${posY}px`;
-
-            // Outline follows with lag using Web Animation API
-            outline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: 'forwards' });
+            // Direct follow
+            cursor.style.transform = `translate(${posX}px, ${posY}px)`;
         };
 
-        const handleMouseEnter = () => {
-            outline.classList.add('hovering');
-            dot.style.display = 'none';
-        };
-
-        const handleMouseLeave = () => {
-            outline.classList.remove('hovering');
-            dot.style.display = 'block';
-        };
-
-        // Add mouse move listener
         window.addEventListener('mousemove', handleMouseMove);
-
-        // Add hover listeners to interactive elements
-        const triggers = document.querySelectorAll('a, button, .hover-trigger, [role="button"]');
-        triggers.forEach(trigger => {
-            trigger.addEventListener('mouseenter', handleMouseEnter);
-            trigger.addEventListener('mouseleave', handleMouseLeave);
-        });
 
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
-            triggers.forEach(trigger => {
-                trigger.removeEventListener('mouseenter', handleMouseEnter);
-                trigger.removeEventListener('mouseleave', handleMouseLeave);
-            });
         };
     }, []);
 
     return (
-        <>
-            <div ref={dotRef} className="cursor-dot" />
-            <div ref={outlineRef} className="cursor-outline" />
-        </>
+        <div
+            ref={cursorRef}
+            className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+            style={{
+                transform: 'translate(-50%, -50%)',
+                marginTop: '-12px', // Center the tip
+                marginLeft: '-12px'
+            }}
+        >
+            <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="rotate-[-45deg]" // Orient to point like a standard cursor
+            >
+                {/* Wide Triangle Shape */}
+                <path
+                    d="M23 1L1 11L11 13L13 23L23 1Z"
+                    fill="white"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinejoin="round"
+                />
+            </svg>
+        </div>
     );
 }
