@@ -16,7 +16,7 @@ export default function Team() {
                 <div className="grid md:grid-cols-4 gap-6">
                     {/* Team Members List */}
                     {[
-                        { name: 'Hruday Divakaran', role: 'President', image: '/images/team/president.jpg' },
+                        { name: 'Hruday Divakaran', role: 'President', image: '/images/team/Pres.jpg' },
                         { name: 'Dennis Abraham', role: 'Vice President', image: '/images/team/vice_president.jpg' },
                         { name: 'Amish Roopesh', role: 'Structural and Design Lead', image: '/images/team/Amish.jpg' },
                         { name: 'Tanishk Maharana', role: 'Propulsion and Braking Lead', image: '/images/team/tanishk_2.jpg' },
