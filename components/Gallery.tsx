@@ -5,7 +5,7 @@ import SpotlightCard from './SpotlightCard';
 const galleryImages = [
     '/images/gallery/grp.jpeg',
     '/images/gallery/g0.jpeg',
-    '/images/hyp.jpg',
+    '/images/gallery/G1.jpg',
     'https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=1000&auto=format&fit=crop', // Keeping one attractive Unsplash fallback for balance
 ];
 
