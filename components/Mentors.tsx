@@ -18,7 +18,7 @@ export default function Mentors() {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-2 gap-8">
                     {mentors.map((mentor, index) => (
                         <SpotlightCard key={index} className="glass-card rounded-3xl p-8 text-center hover:bg-white/5 transition hover-trigger">
                             <div className="w-32 h-32 mx-auto bg-white/10 rounded-full mb-6 flex items-center justify-center">
