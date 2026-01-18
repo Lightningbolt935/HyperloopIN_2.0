@@ -27,7 +27,6 @@ export default function Team() {
                         { name: 'Telu Swayambhu', role:'Corporate', image: '/images/team/Swayambhu.jpg' },
                         { name: 'Sidhant Sairam Mohan', role:' Structural and Design', image: '/images/team/Siddhant.jpg' },
                         { name: 'Allen Mathews', role:'Structural and Design', image: null },
-                        { name: 'Paarth Vijay Shelke', role:'Propulsion and Braking', image: '/images/team/Paarth.jpg' },
                         { name: 'Revant Lenka', role:'Embedded Systems', image: null },
                         { name: 'Jayananthan G', role:'Embedded Systems', image: '/images/team/Jay.jpg' },
                          ].map((member, index) => (
