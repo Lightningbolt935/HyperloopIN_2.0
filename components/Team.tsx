@@ -23,7 +23,14 @@ export default function Team() {
                         { name: 'Vaibhav Aiyer', role: 'Embedded Systems Lead', image: '/images/team/Vai.jpg' },
                         { name: 'Snehil Sahay', role: 'Software Cofigurations Lead', image: '/images/team/Snehil.jpg'  },
                         { name: 'Dhruv Malu', role: 'Corporate Lead', image: '/images/team/Dhruv.jpg' },
-                    ].map((member, index) => (
+                        { name: 'Naman Vedh K S', role:'Corporate', image: '/images/team/Naman.jpg' },
+                        { name: 'Telu Swayambhu', role:'Corporate', image: '/images/team/Swayambhu.jpg' },
+                        { name: 'Sidhant Sairam Mohan', role:' Structural and Design', image: '/images/team/Siddhant.jpg' },
+                        { name: 'Allen Mathews', role:'Structural and Design', image: null },
+                        { name: 'Paarth Vijay Shelke', role:'Propulsion and Braking', image: '/images/team/Paarth.jpg' },
+                        { name: 'Revant Lenka', role:'Embedded Systems', image: null },
+                        { name: 'Jayananthan G', role:'Embedded Systems', image: '/images/team/Jay.jpg' },
+                         ].map((member, index) => (
                         <SpotlightCard key={index} className="glass-card rounded-3xl overflow-hidden group hover-trigger aspect-[3/4] relative">
                             <div className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition" />
 
