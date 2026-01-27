@@ -5,32 +5,7 @@
  * EXACT sponsors and contact info from brochure - WHITE TEXT
  */
 
-const sponsors = [
-    {
-        name: 'Ansys',
-        logo: 'A',
-        website: 'https://www.ansys.com',
-        color: 'text-red-400'
-    },
-    {
-        name: 'Solid Works',
-        logo: 'SOLIDWORKS',
-        website: 'https://www.solidworks.com',
-        color: 'text-red-500'
-    },
-    {
-        name: 'Altium',
-        logo: 'Altium Designer',
-        website: 'https://www.altium.com',
-        color: 'text-yellow-400'
-    },
-    {
-        name: 'Bender',
-        logo: 'BENDER',
-        website: 'https://www.bender.de',
-        color: 'text-green-400'
-    },
-];
+import { sponsors } from '../data/sponsors';
 
 export default function Sponsors() {
     return (
@@ -53,18 +28,18 @@ export default function Sponsors() {
                                 href={sponsor.website}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-8 glass-card rounded-3xl p-10 hover:bg-white/10 transition-all duration-300 hover-trigger group"
+                                className="flex items-center gap-8 glass-card rounded-3xl p-10 hover:bg-white/10 transition-all duration-300 hover-trigger group h-48"
                             >
-                                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-                                    <i className="fa-regular fa-circle-dot text-blue-400 text-xl" />
+                                <div className="flex items-center justify-center w-full h-full relative">
+                                    <img
+                                        src={sponsor.logo}
+                                        alt={sponsor.name}
+                                        className="max-h-24 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 opacity-80 group-hover:opacity-100"
+                                    />
+                                    <div className="absolute top-0 right-0">
+                                        <i className="fa-solid fa-arrow-up-right-from-square text-2xl text-white/50 group-hover:text-white transition-colors" />
+                                    </div>
                                 </div>
-                                <div className="flex items-center gap-8 flex-1">
-                                    <span className="text-3xl font-medium text-white w-40">{sponsor.name}</span>
-                                    <span className={`text-4xl font-bold heading-font ${sponsor.color} group-hover:text-white transition-colors`}>
-                                        {sponsor.logo}
-                                    </span>
-                                </div>
-                                <i className="fa-solid fa-arrow-up-right-from-square text-2xl text-white/50 group-hover:text-white transition-colors" />
                             </a>
                         ))}
                     </div>
