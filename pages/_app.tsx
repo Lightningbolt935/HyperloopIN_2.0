@@ -69,7 +69,7 @@ const defaultSEO = {
     additionalLinkTags: [
         {
             rel: 'icon',
-            href: '/favicon.ico',
+            href: '/favicon.png',
         },
         {
             rel: 'apple-touch-icon',

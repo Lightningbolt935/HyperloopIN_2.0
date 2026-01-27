@@ -36,8 +36,8 @@ export default function Document() {
 
                 {/* Favicon */}
                 {/* Favicon */}
-                <link rel="icon" href="/images/hyp.jpg" />
-                <link rel="apple-touch-icon" href="/images/hyp.jpg" />
+                <link rel="icon" href="/favicon.png" />
+                <link rel="apple-touch-icon" href="/favicon.png" />
                 <link rel="manifest" href="/manifest.json" />
 
                 {/* PWA theme color - Dark theme */}
