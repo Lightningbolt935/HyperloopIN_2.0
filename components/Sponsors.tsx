@@ -34,7 +34,7 @@ export default function Sponsors() {
                                     <img
                                         src={sponsor.logo}
                                         alt={sponsor.name}
-                                        className="max-h-24 max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300 opacity-80 group-hover:opacity-100"
+                                        className="max-h-24 max-w-full object-contain transition-all duration-300 hover:scale-105"
                                     />
                                     <div className="absolute top-0 right-0">
                                         <i className="fa-solid fa-arrow-up-right-from-square text-2xl text-white/50 group-hover:text-white transition-colors" />
