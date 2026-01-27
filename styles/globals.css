@@ -30,7 +30,6 @@
         color: var(--text-main);
         font-family: 'Satoshi', sans-serif;
         overflow-x: hidden;
-        cursor: none;
     }
 
     h1,
@@ -95,7 +94,6 @@
         @apply border border-white/20;
         @apply bg-transparent text-white;
         @apply transition-all duration-300;
-        @apply cursor-none;
     }
 
     .btn-primary:hover {
@@ -135,7 +133,7 @@
 
     /* Hover Trigger for cursor */
     .hover-trigger {
-        cursor: none;
+        cursor: pointer;
     }
 }
 
