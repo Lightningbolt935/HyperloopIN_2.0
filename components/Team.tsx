@@ -20,7 +20,7 @@ export default function Team() {
         { name: 'Naman Vedh K S', role: 'Corporate', image: '/images/team/Naman.jpg' },
         { name: 'Telu Swayambhu', role: 'Corporate', image: '/images/team/Swayambhu.jpg' },
         { name: 'Sidhant Sairam Mohan', role: 'Structural and Design', image: '/images/team/Siddhant.jpg' },
-        { name: 'Allen Mathews', role: 'Structural and Design', image: null },
+        { name: 'Allen Mathews', role: 'Structural and Design', image: '/images/team/Allen.jpg },
         { name: 'Revant Lenka', role: 'Embedded Systems', image: '/images/team/Revant.jpg' },
         { name: 'Jayananthan G', role: 'Embedded Systems', image: '/images/team/Jay.jpg' },
     ];
