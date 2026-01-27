@@ -17,12 +17,11 @@ export default function Team() {
     ];
 
     const associateLeads = [
-        { name: 'Snehil Sahay', role: 'Software Configurations Lead', image: '/images/team/Snehil.jpg' },
-        { name: 'Archit', role: 'Associate Lead', image: '/images/team/Archit.jpg' },
+        { name: 'Snehil Sahay', role: 'Embedded Systems (Software)', image: '/images/team/Snehil.jpg' },
+        { name: 'Archit', role: 'Structural', image: '/images/team/Archit.jpg' },
         { name: 'Naman Vedh K S', role: 'Corporate', image: '/images/team/Naman.jpg' },
-        { name: 'Telu Swayambhu', role: 'Corporate', image: '/images/team/Swayambhu.jpg' },
-        { name: 'Sidhant Sairam Mohan', role: 'Structural and Design', image: '/images/team/Siddhant.jpg' },
-        { name: 'Allen Mathews', role: 'Structural and Design', image: '/images/team/Allen.jpg' },
+        { name: 'Telu Swayambhu', role: 'Traction', image: '/images/team/Swayambhu.jpg' },
+        { name: 'Allen Mathews', role: 'Thermal', image: '/images/team/Allen.jpg' },
         { name: 'Revant Lenka', role: 'Embedded Systems', image: '/images/team/Revant.jpg' },
         { name: 'Jayananthan G', role: 'Embedded Systems', image: '/images/team/Jay.jpg' },
     ];
