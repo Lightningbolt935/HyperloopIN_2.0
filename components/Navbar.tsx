@@ -40,7 +40,7 @@ export default function Navbar() {
                 href="/"
                 className="hover-trigger"
             >
-                <div className="bg-white rounded-lg px-3 py-1.5">
+                <div>
                     <img
                         src="/images/logo.png"
                         alt="Hyperloopin"
