@@ -9,14 +9,16 @@ export default function Team() {
     ];
 
     const leads = [
-        { name: 'Amish Roopesh', role: 'Structural and Design Lead', image: '/images/team/Amish.jpg' },
-        { name: 'Tanishk Maharana', role: 'Propulsion and Braking Lead', image: '/images/team/tanishk_2.jpg' },
+        { name: 'Ayush K Choudhary', role: 'Structural Lead', image: '/images/team/Ayush.jpg' },
+        { name: 'Amish Roopesh', role: 'Thermal Lead', image: '/images/team/Amish.jpg' },
+        { name: 'Tanishk Maharana', role: 'Traction Lead', image: '/images/team/tanishk_2.jpg' },
         { name: 'Vaibhav Aiyer', role: 'Embedded Systems Lead', image: '/images/team/Vai.jpg' },
-        { name: 'Snehil Sahay', role: 'Software Configurations Lead', image: '/images/team/Snehil.jpg' },
         { name: 'Dhruv Malu', role: 'Corporate Lead', image: '/images/team/Dhruv.jpg' },
     ];
 
-    const members = [
+    const associateLeads = [
+        { name: 'Snehil Sahay', role: 'Software Configurations Lead', image: '/images/team/Snehil.jpg' },
+        { name: 'Archit', role: 'Associate Lead', image: '/images/team/Archit.jpg' },
         { name: 'Naman Vedh K S', role: 'Corporate', image: '/images/team/Naman.jpg' },
         { name: 'Telu Swayambhu', role: 'Corporate', image: '/images/team/Swayambhu.jpg' },
         { name: 'Sidhant Sairam Mohan', role: 'Structural and Design', image: '/images/team/Siddhant.jpg' },
@@ -89,11 +91,11 @@ export default function Team() {
                     </div>
                 </div>
 
-                {/* Members Section */}
+                {/* Associate Leads Section */}
                 <div>
-                    <h3 className="text-2xl font-bold text-white mb-6 uppercase tracking-wide">Team Members</h3>
+                    <h3 className="text-2xl font-bold text-white mb-6 uppercase tracking-wide">Associate Leads</h3>
                     <div className="grid md:grid-cols-4 gap-6">
-                        {members.map((member, index) => (
+                        {associateLeads.map((member, index) => (
                             <SpotlightCard key={index} className="glass-card rounded-3xl overflow-hidden group hover-trigger aspect-[3/4] relative">
                                 <div className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition" />
 
