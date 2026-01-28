@@ -64,13 +64,13 @@ export default function Contact() {
                         <div className="pt-8 border-t border-white/10">
                             <h4 className="text-white font-bold text-lg mb-6">Follow Us</h4>
                             <div className="flex gap-4">
-                                <a href="#" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
+                                <a href="https://www.instagram.com/hyperloopinsrm/" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
                                     <i className="fa-brands fa-instagram text-xl" />
                                 </a>
-                                <a href="https://www.instagram.com/hyperloopinsrm/" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
+                                <a href="https://www.linkedin.com/company/hyperloopin" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
                                     <i className="fa-brands fa-linkedin-in text-xl" />
                                 </a>
-                                <a href="https://www.linkedin.com/company/hyperloopin" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
+                                <a href="" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
                                     <i className="fa-brands fa-twitter text-xl" />
                                 </a>
                             </div>
