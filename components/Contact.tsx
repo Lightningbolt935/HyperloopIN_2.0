@@ -67,10 +67,10 @@ export default function Contact() {
                                 <a href="#" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
                                     <i className="fa-brands fa-instagram text-xl" />
                                 </a>
-                                <a href="#" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
+                                <a href="https://www.instagram.com/hyperloopinsrm/" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
                                     <i className="fa-brands fa-linkedin-in text-xl" />
                                 </a>
-                                <a href="#" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
+                                <a href="https://www.linkedin.com/company/hyperloopin" className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
                                     <i className="fa-brands fa-twitter text-xl" />
                                 </a>
                             </div>
