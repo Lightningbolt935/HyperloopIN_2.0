@@ -39,25 +39,18 @@ export default function Team() {
                 {/* Leadership Section */}
                 <div className="mb-12">
                     <h3 className="text-2xl font-bold text-white mb-6 uppercase tracking-wide">Leadership</h3>
-                    <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                    <div className="grid grid-cols-2 gap-4 sm:gap-8 max-w-3xl mx-auto">
                         {leadership.map((member, index) => (
-                            <SpotlightCard key={index} className="glass-card rounded-3xl overflow-hidden group hover-trigger aspect-[3/4] relative">
-                                <div className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition" />
-
-                                {member.image ? (
+                            <SpotlightCard key={index} className="glass-card rounded-3xl p-4 sm:p-8 text-center hover:bg-white/5 transition hover-trigger">
+                                <div className="w-24 h-24 sm:w-40 sm:h-40 mx-auto rounded-full mb-4 sm:mb-6 overflow-hidden border-2 border-white/20">
                                     <img
                                         src={member.image}
                                         alt={member.name}
-                                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                        className="w-full h-full object-cover"
                                     />
-                                ) : (
-                                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
-                                )}
-
-                                <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
-                                    <h3 className="text-xl font-bold text-white">{member.name}</h3>
-                                    <p className="text-blue-400 text-sm">{member.role}</p>
                                 </div>
+                                <h3 className="text-lg sm:text-2xl font-bold text-white mb-1 sm:mb-2">{member.name}</h3>
+                                <p className="text-blue-400 text-sm sm:text-base font-medium">{member.role}</p>
                             </SpotlightCard>
                         ))}
                     </div>
@@ -66,25 +59,18 @@ export default function Team() {
                 {/* Leads Section */}
                 <div className="mb-12">
                     <h3 className="text-2xl font-bold text-white mb-6 uppercase tracking-wide">Team Leads</h3>
-                    <div className="grid md:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
                         {leads.map((member, index) => (
-                            <SpotlightCard key={index} className="glass-card rounded-3xl overflow-hidden group hover-trigger aspect-[3/4] relative">
-                                <div className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition" />
-
-                                {member.image ? (
+                            <SpotlightCard key={index} className="glass-card rounded-3xl p-4 sm:p-6 text-center hover:bg-white/5 transition hover-trigger">
+                                <div className="w-20 h-20 sm:w-28 sm:h-28 mx-auto rounded-full mb-3 sm:mb-4 overflow-hidden border-2 border-white/20">
                                     <img
                                         src={member.image}
                                         alt={member.name}
-                                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                        className="w-full h-full object-cover"
                                     />
-                                ) : (
-                                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
-                                )}
-
-                                <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
-                                    <h3 className="text-xl font-bold text-white">{member.name}</h3>
-                                    <p className="text-blue-400 text-sm">{member.role}</p>
                                 </div>
+                                <h3 className="text-sm sm:text-lg font-bold text-white mb-1">{member.name}</h3>
+                                <p className="text-blue-400 text-xs sm:text-sm font-medium">{member.role}</p>
                             </SpotlightCard>
                         ))}
                     </div>
@@ -93,25 +79,18 @@ export default function Team() {
                 {/* Associate Leads Section */}
                 <div>
                     <h3 className="text-2xl font-bold text-white mb-6 uppercase tracking-wide">Associate Leads</h3>
-                    <div className="grid md:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-6">
                         {associateLeads.map((member, index) => (
-                            <SpotlightCard key={index} className="glass-card rounded-3xl overflow-hidden group hover-trigger aspect-[3/4] relative">
-                                <div className="absolute inset-0 bg-white/5 group-hover:bg-white/10 transition" />
-
-                                {member.image ? (
+                            <SpotlightCard key={index} className="glass-card rounded-3xl p-3 sm:p-5 text-center hover:bg-white/5 transition hover-trigger">
+                                <div className="w-16 h-16 sm:w-24 sm:h-24 mx-auto rounded-full mb-2 sm:mb-4 overflow-hidden border-2 border-white/20">
                                     <img
                                         src={member.image}
                                         alt={member.name}
-                                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                        className="w-full h-full object-cover"
                                     />
-                                ) : (
-                                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
-                                )}
-
-                                <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
-                                    <h3 className="text-xl font-bold text-white">{member.name}</h3>
-                                    <p className="text-blue-400 text-sm">{member.role}</p>
                                 </div>
+                                <h3 className="text-xs sm:text-base font-bold text-white mb-1 line-clamp-1">{member.name}</h3>
+                                <p className="text-blue-400 text-xs sm:text-sm font-medium line-clamp-1">{member.role}</p>
                             </SpotlightCard>
                         ))}
                     </div>
